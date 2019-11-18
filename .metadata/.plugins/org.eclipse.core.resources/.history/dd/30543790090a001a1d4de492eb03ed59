@@ -1,0 +1,28 @@
+package com.itron.Kata.notifier;
+
+import java.time.format.DateTimeFormatter;
+
+import com.itron.Kata.ClinicCalendar;
+import com.itron.Kata.PatientAppointment;
+import com.sun.mail.smtp.SMTPMessage;
+
+public class UpcomingAppointmentNotifier {
+
+	private ClinicCalendar calendar;
+	
+	public UpcomingAppointmentNotifier(ClinicCalendar calendar) {
+		this.calendar = calendar;
+	}
+	
+	public void run() {
+		for(PatientAppointment appt : calendar.getTomorrowdAppointments()) {
+			SMTPMessageSender notifier = new SMTPMessageSender();
+			String email = appt.getPatientLastName().toLowerCase()  + appt.getPatientFirstName().toLowerCase()
+		    System.out.println("Sending with body: " + buildMessageBody(appt), email);
+		}
+	}
+
+	private String buildMessageBody(PatientAppointment appt) {
+		return "You have an appontment tommorrow at " + appt.getAppointmentDateTime().format(DateTimeFormatter.ofPattern("h:mm a", Locale.US)) + " with Dr.  ";
+	}
+}

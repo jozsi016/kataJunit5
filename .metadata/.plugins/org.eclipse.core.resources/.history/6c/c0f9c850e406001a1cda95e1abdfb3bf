@@ -1,0 +1,18 @@
+package com.itron.Kata;
+
+public enum Doctor {
+	avery("alph Avery"), 
+	johnson("Beth Johnson"),
+	murphy("Pat Murpy");
+	
+	private String name;
+
+	Doctor(String name) {
+		this.name=name;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+}

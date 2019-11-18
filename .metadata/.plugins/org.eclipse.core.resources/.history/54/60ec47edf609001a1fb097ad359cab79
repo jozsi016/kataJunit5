@@ -1,0 +1,151 @@
+package com.itron.Kata;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
+import javax.annotation.processing.RoundEnvironment;
+
+public class ClinicMain {
+
+	static ClinicCalendar calendar;
+
+	/*
+	 * Call display menu while x is not pressed.
+	 */
+	public static void main(String[] args) {
+		calendar = new ClinicCalendar(LocalDate.now());
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Welcome to the Patient Intake Computer System! \n\n");
+		String lastOption = "";
+		while (!lastOption.equalsIgnoreCase("x")) {
+			lastOption = displayMenu(scanner);
+		}
+		System.out.println("\nExiting System..\n");
+	}
+
+	/*
+	 * Diplays the menu for ClinicCalendar.
+	 */
+	private static String displayMenu(Scanner scanner) {
+		System.out.println("Please select an option:");
+		System.out.println("1. Enter a Patient Appointment");
+		System.out.println("2. View All Apointments");
+		System.out.println("3. View Today's Apointments");
+		System.out.println("4. Enter Patient Height Weight");
+		System.out.println("X. Exit System.");
+		System.out.println("Option: ");
+		String option = scanner.next();
+		switch (option) {
+		case "1":
+			performPatienEntry(scanner);
+			return option;
+		case "2":
+			performAppointments();
+			return option;
+		case "3":
+			performTodayAppointments();
+			return option;
+		case "4": 
+			performHeightWeight(scanner);
+			return option;
+		default:
+			System.out.println("Invalid option, please re-enter. ");
+			return option;
+		}
+	}
+
+	
+
+
+	private static void performHeightWeight(Scanner scanner) {
+		scanner.nextLine();
+		System.out.println("\n\nEnter patient height and weight for today's appointment: ");
+		System.out.println(" Patient Last Name: ");
+		String lastName = scanner.nextLine();
+		System.out.println(" Patient First Name: ");
+		String firstName = scanner.nextLine();
+		PatientAppointment appt = 
+				BMICalculator.findPatientAppointment(lastName, firstName).orElse(null);
+		if(appt != null) {
+			System.out.println("Height in Inches: ");
+			Integer inches =  scanner.nextInt();
+			System.out.println("Weight in Pounds: ");
+			Integer pounds = scanner.nextInt();
+			double roundToTwoPlaces = calculateBmi(inches, pounds);
+			appt.setBmi(roundToTwoPlaces);
+			System.out.println("Set patient BMI to " + roundToTwoPlaces + "\n\n");
+		} else {
+			System.out.println("Patient not found. \n\n");
+		}
+	}
+
+	private static double calculateBmi(Integer inches, Integer pounds) {
+		Double bmi = (double) (pounds * 703) / (inches * inches);
+		double roundToTwoPlaces = new BigDecimal(bmi).setScale(2, RoundingMode.HALF_UP).doubleValue();
+		return roundToTwoPlaces;
+	}
+
+//	private static Optional<PatientAppointment> findPatientAppointment(String lastName, String firstName) {
+//		for (PatientAppointment appointment : calendar.getAppointments()) {
+//			if(appointment.getPatientFirstName().equals(firstName) && appointment.getPatientLastName().equals(lastName)) {
+//				return Optional.of(appointment);
+//			}
+//		}
+//		return null;
+//	}
+
+	/*
+	 * Add an appointment to the clinicCalendar
+	 */
+	private static void performPatienEntry(Scanner scanner) {
+		scanner.nextLine();
+		System.out.println("\n\nPlease Enter Appointment Info:");
+		System.out.println(" Patient Last Name: ");
+		String lastName = scanner.nextLine();
+		System.out.println(" PAtient First Name: ");
+		String firstName = scanner.nextLine();
+		System.out.println("Appointment Date (M/d/yyyy h:m a): ");
+		String when = scanner.nextLine();
+		System.out.println(" Doctor Last Name: ");
+		String doc = scanner.nextLine();
+		try {
+			calendar.addApointment(firstName, lastName, doc, when);
+		} catch (Throwable t) {
+			System.out.println("Error! " + t.getMessage());
+			return;
+		}
+		System.out.println("Patient entered successfully.\n\n");
+	}
+
+	/*
+	 * Show appointments. 
+	 */
+	private static void performAppointments() {
+		System.out.println("\n\n All Appointments in System: ");
+		for (PatientAppointment appointment : calendar.getAppointments()) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy hh:mm a");
+			String appTime = formatter.format(appointment.getAppointmentDateTime());
+			System.out.println(String.format("%s: %s, %s\t\t Doctor: %s", appTime,
+					appointment.getPatientLastName(), appointment.getPatientFirstName(),
+					appointment.getDoctor().getName()));
+		}
+		System.out.println("\nPress any key to continue...");
+	}
+	
+	private static void performTodayAppointments() {
+		System.out.println("\n\n Todays Appointments in System: ");
+		for (PatientAppointment appointment : calendar.getTodaydAppointments()) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy hh:mm a");
+			String appTime = formatter.format(appointment.getAppointmentDateTime());
+			System.out.println(String.format("%s: %s, %s\t\t Doctor: %s", appTime,
+					appointment.getPatientLastName(), appointment.getPatientFirstName(),
+					appointment.getDoctor().getName()));
+		}
+		System.out.println("\nPress any key to continue...");
+		
+	}
+
+}

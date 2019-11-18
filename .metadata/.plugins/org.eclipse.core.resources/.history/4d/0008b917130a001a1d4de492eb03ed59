@@ -1,0 +1,5 @@
+package com.itron.Kata;
+
+public class EmailNotifierTestDouble {
+
+}

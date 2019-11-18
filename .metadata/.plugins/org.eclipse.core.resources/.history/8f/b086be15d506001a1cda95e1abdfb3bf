@@ -1,0 +1,15 @@
+package com.itron.Kata;
+
+public class ClinicCalendar {
+
+	public void addApointment(String firstName, String lastName, String doc, String when) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Object getAppointments() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

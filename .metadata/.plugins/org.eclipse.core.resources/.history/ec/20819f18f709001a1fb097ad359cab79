@@ -1,0 +1,9 @@
+package com.itron.Kata;
+
+import java.util.Optional;
+
+public class BMICalculator {
+
+
+
+}

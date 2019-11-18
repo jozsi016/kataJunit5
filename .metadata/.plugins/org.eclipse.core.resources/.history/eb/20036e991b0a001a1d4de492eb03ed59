@@ -1,0 +1,14 @@
+package com.itron.Kata;
+
+import java.time.LocalDate;
+
+import org.junit.jupiter.api.BeforeEach;
+
+public class ClinicCalendarShould {
+
+	public ClinicCalendar calendar;
+	
+	@BeforeEach
+	void init() { calendar  =  new ClinicCalendar(LocalDate.of(2018, 8, 26));
+	}
+}

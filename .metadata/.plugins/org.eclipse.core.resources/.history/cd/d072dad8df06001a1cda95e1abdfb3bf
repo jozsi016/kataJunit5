@@ -1,0 +1,15 @@
+package com.itron.Kata;
+
+public enum Doctor {
+	"alph Avery", 
+	"Beth Johnson",
+	"Pat Murpy";
+	
+	private String name;
+
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

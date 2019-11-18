@@ -1,0 +1,23 @@
+package com.itron.Kata;
+
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
+
+import com.itron.Kata.notifier.UpcomingAppointmentNotifier;
+
+class UpcommingAppointmentNotifierTest {
+
+	@Test
+	void test() {
+		ClinicCalendar calendar = new ClinicCalendar(LocalDate.of(2018, 8, 26));
+		PatientAppointment appt = new PatientAppointment("Jim", "Weaver", LocalDateTime.of(2018, 8,27, 14,30), Doctor.avery);
+		calendar.addApointment("Jim", "Weaver","avery","08/27/2018 2:00 pm");
+		UpcomingAppointmentNotifier notifier = new UpcomingAppointmentNotifier(calendar);
+		notifier.run();
+		
+	}
+
+}

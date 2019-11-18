@@ -1,0 +1,12 @@
+package com.itron.Kata;
+
+public enum Doctor {
+	
+	private String name;
+
+	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

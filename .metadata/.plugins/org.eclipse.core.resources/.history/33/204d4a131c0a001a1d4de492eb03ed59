@@ -1,0 +1,27 @@
+package com.itron.Kata;
+
+import java.time.LocalDate;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+
+public class ClinicCalendarShould {
+
+	public ClinicCalendar calendar;
+	
+	@BeforeEach
+	void init() { calendar  =  new ClinicCalendar(LocalDate.of(2018, 8, 26));
+	}
+	
+	@Nested
+	@DisplayName("return upcoming appointments")
+	class UpcomingAppointments {
+		@Test
+		void whenThereAreNone() {
+			
+		}
+	}
+	
+}

@@ -1,0 +1,13 @@
+package com.itron.Kata;
+
+import com.itron.Kata.notifier.EmailNotifier;
+
+public class EmailNotifierTestDouble implements EmailNotifier {
+
+	@Override
+	public void sendNotification(String subject, String body, String address) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

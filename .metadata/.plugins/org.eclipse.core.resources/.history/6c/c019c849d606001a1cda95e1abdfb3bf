@@ -1,0 +1,13 @@
+package com.itron.Kata;
+
+import java.time.LocalDateTime;
+import java.time.temporal.TemporalAccessor;
+
+public class PatientAppointment {
+
+	private String patientFirstName;
+	private String patientLastName;
+	private LocalDateTime appointmentDateTime;
+	private Doctor doctor
+
+}

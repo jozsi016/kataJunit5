@@ -1,0 +1,52 @@
+package com.itron.Kata;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
+public class ClinicCalendarShould {
+
+	@Test
+	public void allowEntryOfAnApointment() {
+		ClinicCalendar calendar = new ClinicCalendar();
+		calendar.addApointment("Jim", "Weaver", "avery", "09/01/2018 2:00 pm");
+		List<PatientAppointment> appoinments = calendar.getAppointments();
+		assertNotNull(appoinments);
+		assertEquals(1, appoinments.size());
+		PatientAppointment enterAppt = appoinments.get(0);
+		assertEquals("Jim", enterAppt.getPatientFirstName());
+		assertEquals("Weaver", enterAppt.getPatientLastName());
+		assertEquals(Doctor.avery, enterAppt.getDoctor());
+		assertSame(Doctor.avery, enterAppt.getDoctor());
+		assertNotSame(Doctor.johnson, enterAppt.getDoctor());
+		assertEquals("9/1/2018 02:00 PM",
+				enterAppt.getAppointmentDateTime().format(DateTimeFormatter.ofPattern("M/d/yyyy hh:mm a")));
+	}
+
+	@Test
+	public void returnTrueForHasAppointmentsIfThereAreAppointments() {
+		ClinicCalendar calendar = new ClinicCalendar(LocalDate.of(2018, 9, 1));
+		calendar.addApointment("Jim", "Weaver", "avery", "09/01/2018 2:00 pm");
+		assertTrue(calendar.hasAppointment(LocalDate.of(2018, 9, 1)));
+	}
+
+	@Test
+	public void returnFalseForHasAppointmentsIfthereAreNoAppoinments() {
+		ClinicCalendar calendar = new ClinicCalendar(LocalDate.of(2018, 9, 1));
+		assertFalse(calendar.hasAppointment(LocalDate.of(2018, 9, 1)));
+	}
+	
+	@Test
+	public void returnCurrentDayAppointments() {
+		ClinicCalendar calendar = new ClinicCalendar(LocalDate.now());
+		calendar.addApointment("Jim", "Weaver", "avery", "11/15/2019 2:00 am");
+		calendar.addApointment("Jim", "Weaver", "avery", "11/15/2019 3:00 am");
+		calendar.addApointment("Jim", "Weaver", "avery", "11/15/2019 4:00 am");
+		//assertEquals(2, calendar.getTodaydAppointments().size());
+		assertEquals(calendar.getTodaydAppointments().size(), calendar.getAppointments().size());
+		
+	}
+}

@@ -1,0 +1,12 @@
+1574075431437	Extract method 'calculateBmi'
+1574076256902	Move member 'findPatientAppointment'
+1574082056847	Rename package 'com.itron.Kata'
+1574082156469	Rename package 'com.itron.kata'
+1574082367117	Delete element
+1574082458167	Delete element
+1574082509812	Delete element
+1574082577663	Delete element
+1574085325309	Rename type 'AppTest2'
+1574088375921	Extract interface 'EmailNotifier'
+1574089101193	Rename field 'notifeir'
+1574090851687	Extract method 'sendNotificationForAppointment'

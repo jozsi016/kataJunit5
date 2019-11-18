@@ -1,0 +1,12 @@
+package com.itron.Kata;
+
+import java.time.temporal.TemporalAccessor;
+
+public class PatientAppointment {
+
+	public TemporalAccessor getAppointmentDateTime() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

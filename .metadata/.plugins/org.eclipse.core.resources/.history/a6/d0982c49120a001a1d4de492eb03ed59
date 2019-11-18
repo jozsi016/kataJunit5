@@ -1,0 +1,5 @@
+package com.itron.Kata.notifier;
+
+public interface EmailNotifier {
+
+}

@@ -1,0 +1,30 @@
+package com.itron.Kata;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
+
+public class DateTimeConverterShould {
+
+	@Test
+	public void convertTodayStringCorrectly() {
+		LocalDateTime result = DateTimeConverter.convertStringToDateTime("today 1:00 pm", LocalDate.of(2019, 11, 11));
+		assertEquals(result, LocalDateTime.of(2019, 11, 11, 13, 0));
+	}
+
+	@Test
+	public void convertCorrectPatternToDateTime() {
+		LocalDateTime result = DateTimeConverter.convertStringToDateTime("9/2/2018 1:00 pm", LocalDate.of(2019, 11, 11));
+		assertEquals(result, LocalDateTime.of(2018, 9, 2, 13, 0));
+	}
+	
+	@Test
+	public void throwExceptionIfIncorrectPatternProvided() {
+		assertThrows(RuntimeException.class, () -> DateTimeConverter.convertStringToDateTime( "9/1/2018 100 pm", LocalDate.of(2018, 9, 1)));
+	}
+}

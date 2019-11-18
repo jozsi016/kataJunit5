@@ -1,0 +1,38 @@
+package com.itron.Kata;
+
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+@DisplayName("DateTimeConverter should")
+public class DateTimeConverterShould {
+
+	@Test
+	@DisplayName("converrt string with 'today' keyword correctly")
+	public void convertTodayStringCorrectly() {
+		LocalDate today =  LocalDate.of(2019, 11, 11);
+		LocalDateTime result = DateTimeConverter.convertStringToDateTime("today 1:00 pm", today);
+		assertEquals(result, LocalDateTime.of(2019, 11, 12, 13, 0), "Failed to convert 'today' string to expected date time, today passed was: " + today);
+	}
+
+	@Test
+	public void convertCorrectPatternToDateTime() {
+		LocalDateTime result = DateTimeConverter.convertStringToDateTime("9/2/2018 1:00 pm",
+				LocalDate.of(2019, 11, 11));
+		assertEquals(result, LocalDateTime.of(2018, 9, 2, 13, 0));
+	}
+
+	@Test
+	public void throwExceptionIfIncorrectPatternProvided() {
+		Throwable error = assertThrows(RuntimeException.class,
+				() -> DateTimeConverter.convertStringToDateTime("9/1/2018 100 pm", LocalDate.of(2018, 9, 1)));
+		assertEquals("Unable to create date time from: [9/1/2018 100 PM], please enter with format [M/d/yyyy h:mm a] ",
+				error.getMessage());
+	}
+}

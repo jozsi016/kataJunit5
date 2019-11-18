@@ -1,0 +1,8 @@
+package com.itron.Kata.notifier;
+
+import com.itron.kata.ClinicCalendar;
+
+public class UpcomingAppointmentNotifier {
+
+	private ClinicCalendar calendar;
+}

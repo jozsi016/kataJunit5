@@ -1,0 +1,10 @@
+package com.itron.Kata;
+
+public class ClinicMain {
+
+	private static ClinicCalendar calendar;
+	public static void main(String[]args) {
+		
+	} 
+	
+}

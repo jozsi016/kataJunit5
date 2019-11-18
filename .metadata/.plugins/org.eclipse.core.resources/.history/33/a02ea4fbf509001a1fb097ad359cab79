@@ -1,0 +1,13 @@
+package com.itron.Kata;
+
+import java.util.Optional;
+
+public class BMICalculator {
+
+	static Optional<PatientAppointment> findPatientAppointment(String lastName, String firstName) {
+		return ClinicMain.calendar.getTodaydAppointments().stream()
+			.filter(p -> (p.getPatientLastName().equalsIgnoreCase(lastName) && p.getPatientFirstName().equalsIgnoreCase(firstName)))
+			.findFirst();
+	}
+
+}

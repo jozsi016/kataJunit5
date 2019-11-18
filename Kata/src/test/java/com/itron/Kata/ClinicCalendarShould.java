@@ -1,0 +1,42 @@
+package com.itron.Kata;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+
+public class ClinicCalendarShould {
+
+	public ClinicCalendar calendar;
+	
+	@BeforeEach
+	void init() { calendar  =  new ClinicCalendar(LocalDate.of(2019, 11, 18));
+	}
+	
+	@Nested
+	@DisplayName("return upcoming appointments")
+	class UpcomingAppointments {
+		
+		@Test
+		void whenThereAreNone() {
+			List<PatientAppointment> appointments =  calendar.getUpcommigAppointments();
+			assertEquals(0, appointments.size());
+		}
+		
+		@Test
+		void whenSomePastAndFutureAppointments() {
+			calendar.addApointment("Jim","Weaver", "avery", "10/01/2018 02:00 pm");
+			calendar.addApointment("Jim","Weaver", "avery", "12/01/2019 02:00 pm");
+			calendar.addApointment("Jim","Weaver", "avery", "12/05/2019 02:00 pm");
+			//List<PatientAppointment> appointments = calendar.getUpcommigAppointments();
+			assertEquals(2, calendar.getUpcommigAppointments().size());
+		}
+		
+	}
+	
+}
